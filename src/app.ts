@@ -1,25 +1,20 @@
-const express = require('express');
+// import module
+import express from 'express';
 
+// import file
+const userRouter = require('./routers/userRouter.router');
+const productRouter = require('./routers/productRouter.router');
+
+// using middle
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-app.get('', (req:any, res:any) => {
-  try {
-    const string = 'hello world';
-    res.status(201).send({ string });
-  } catch (error) {
-    res.status(501).send(error);
-  }
-});
+// using route middleware
+app.use(express.json());
+app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
 
-app.get('/products', (req: any, res: any) => {
-  try {
-    
-  } catch (error) {
-    
-  }
-});
-
+// server
 app.listen(port, () => {
   console.log(`server is starting at port ${port}.`);
 });  
