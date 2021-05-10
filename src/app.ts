@@ -1,18 +1,15 @@
 // import module
-import express from 'express';
+import express, { Application, Router } from 'express';
 
 // import file
-const userRouter = require('./routers/userRouter.router');
-const productRouter = require('./routers/productRouter.router');
+import routes from './routers/route.router';
 
-// using middle
-const app = express();
+const app: Application = express();
 const port = process.env.PORT || 3000;
 
-// using route middleware
+// using middleware
 app.use(express.json());
-app.use('/api/users', userRouter);
-app.use('/api/products', productRouter);
+app.use(routes);
 
 // server
 app.listen(port, () => {

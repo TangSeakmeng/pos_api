@@ -1,24 +1,22 @@
-const express = require('express');
-const router = new express.Router();
+import { Request, Response, Router } from 'express';
+const userRouter = Router();
 
-router.get('/', (req: any, res: any) => {
+userRouter.get('/', (req: Request, res: Response) => {
   try {
     const string = 'hello world';
-    res.status(201).send({ string });
+    res.status(200).send(string);
   } catch (error) {
     res.status(501).send(error);
   }
 });
 
-router.post('/create', (req: any, res: any) => {
+userRouter.post('/create', (req: Request, res: Response) => {
   try {
-    res.status(201).send({
-      firstname: 'hello',
-      lastname: 'world'
-    });
+    const user = { firstname: 'hello', lastname: 'world' };
+    return res.status(200).json(user);
   } catch (error) {
-    res.status(501).send(error);
+    return res.status(501).json(error);
   }
 });
 
-module.exports = router;
+export default userRouter;

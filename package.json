@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.ts",
-    "dev": "env-cmd -f config/dev.env nodemon src/app.ts"
+    "start": "ts-node src/app.ts",
+    "dev": "env-cmd -f config/dev.env nodemon src/app.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
