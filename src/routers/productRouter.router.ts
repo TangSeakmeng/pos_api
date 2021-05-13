@@ -1,7 +1,8 @@
 import { Request, Response, Router } from 'express';
+import auth from '../middlewares/auth';
 const productRouter = Router();
 
-productRouter.get('', (req: Request, res: Response) => {
+productRouter.get('', auth, (req: Request, res: Response) => {
   try {
     const arrProduct = [
       {

@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, PrimaryColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, JoinTable} from "typeorm";
+import { User } from "./User.entity";
 
 @Entity({ name: "categories" })
 export class Category extends BaseEntity {
@@ -21,4 +22,15 @@ export class Category extends BaseEntity {
   @Column({ nullable: true })
   updatedDate: Date;
 
+  @ManyToOne(type => User, user => user.categories0)
+  @JoinColumn([
+    { name: 'createdBy' },
+  ])
+  createdBy: User;
+
+  @ManyToOne(type => User, user => user.categories1)
+  @JoinColumn([
+    { name: 'updatedBy' },
+  ])
+  updatedBy: User;
 }
