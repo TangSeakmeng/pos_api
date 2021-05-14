@@ -1,4 +1,5 @@
 // import module
+import cors from 'cors';
 import express, { Application, Router } from 'express';
 import "reflect-metadata";
 import { createConnection } from "typeorm";
@@ -10,6 +11,7 @@ const app: Application = express();
 const port = process.env.PORT || 3000;
 
 // using middleware
+app.use('*', cors());
 app.use(express.json());
 app.use(routes);
 

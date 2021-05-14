@@ -9,6 +9,7 @@ const userService = new UserService();
 
 // console.log(req.query) -- get data from params
 
+
 // get all users
 // localhost:3000/api/users
 // localhost:3000/api/users?hello=world
@@ -21,6 +22,7 @@ userRouter.get('', auth, async (req: Request, res: Response) => {
   }
 });
 
+
 // get one user
 // localhost:3000/api/users/getUser
 userRouter.get('/getUser', auth, async (req: Request, res: Response) => {
@@ -31,6 +33,7 @@ userRouter.get('/getUser', auth, async (req: Request, res: Response) => {
     res.status(501).send(error);
   }
 });
+
 
 // create user
 // localhost:3000/api/users/create
@@ -58,6 +61,7 @@ userRouter.post('/create', async (req: Request, res: Response) => {
     return res.status(501).json(error);
   }
 });
+
 
 // user login
 // localhost:3000/api/users/login

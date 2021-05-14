@@ -13,7 +13,6 @@ categoryRouter.get('/userid/:userid', async (req: Request, res: Response) => {
       .createQueryBuilder()
       .select('*')
       .from(Category, 'categories')
-      // .innerJoinAndSelect("categories.createdBy", "users")
       .innerJoin(
         query => {
           return query
@@ -23,9 +22,14 @@ categoryRouter.get('/userid/:userid', async (req: Request, res: Response) => {
         'users',
         '"user_id" = categories."createdBy"'
       )
-      // .where("categories.createdBy = :userid")
-      // .setParameters({ userid: userid })
       .getRawMany();
+
+    // let categories = await Category
+    //   .createQueryBuilder('categories')
+    //   .innerJoinAndSelect("categories.createdBy", "users")
+    //   .where("categories.createdBy = :userid")
+    //   .setParameters({ userid: userid })
+    //   .getMany();
     
     console.log(categories)
     
@@ -38,8 +42,8 @@ categoryRouter.get('/userid/:userid', async (req: Request, res: Response) => {
 // /api/categories/create - POST
 categoryRouter.post('/create', async (req: Request, res: Response) => {
   try {
-    const user = new User();
-    user.id = "a8f7878d-e2dc-4185-9226-9dc540d60a86";
+    // const user = new User();
+    // user.id = "a8f7878d-e2dc-4185-9226-9dc540d60a86";
 
     const category = {
       id: uuidv4(),
@@ -48,8 +52,8 @@ categoryRouter.post('/create', async (req: Request, res: Response) => {
       imageFilePath: req.body.imageFilePath,
       createdDate: new Date(),
       updatedDate: new Date(),
-      createdBy: user,
-      updatedBy: user
+      createdBy: req.body.user,
+      updatedBy: req.body.user,
     };
     const insertCategory: Category = Category.create(category);
     const result = await insertCategory.save();
